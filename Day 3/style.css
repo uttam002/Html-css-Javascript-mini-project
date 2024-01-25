@@ -1,0 +1,113 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+}
+:root{
+    --clr: #fff;
+    --snow:#78d6e9;
+}
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    min-height: 100vh;
+    background: url('bg2.jpg');
+    background-size: cover;
+    background-position: center;
+
+}
+.mainBox{
+    position: relative;
+    justify-content: center;
+    width: 100%;
+    top: 100px;
+    height: 400px;
+    display: flex;
+}
+.mainBox .cloud{
+    position: relative;
+    width: 100px;
+    height: 300px;
+    z-index: 100;
+    filter: drop-shadow(0 0 35px var(--clr));
+}
+.mainBox .cloud h2{
+    position: absolute;
+    left: -45%;
+    color:#000;
+    white-space: nowrap;
+    background-color: var(--clr);
+    font-size: 2em;
+    z-index: 1000;
+    font-weight: 500;
+    padding: 0 10px;
+    border-radius: 10px;
+}
+.mainBox .cloud h2::before{
+    content: '';
+    position: absolute;
+    width: 110%;
+    left: 50%;
+    top: -115px;
+    height: 90px;
+    transform: translateX(-50%);
+    border-radius: 100px;
+    background: var(--clr);
+}
+.mainBox .cloud h2::after{
+    content: '';
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    top: -160px;
+    left: 25px;
+    background: var(--clr);
+    border-radius: 50%;
+    box-shadow: 110px -25px 0px 25px var(--clr);
+}
+.mainBox .cloud .drop{
+    position: absolute;
+    top: 40px;
+    height: 20px;
+    line-height: 20px;
+    color: var(--clr);
+    transform-origin: bottom;
+    animation: animate 2s linear infinite;
+}
+@keyframes animate {
+    0%{
+        transform: translateY(0) scaleY(0);
+        transform-origin: top;
+    }
+    10%{
+        transform: translateY(0) scaleY(0.25);
+        transform-origin: top;
+    }
+    20%{
+        transform: translateY(0) scaleY(1);
+        /* transform-origin: top; */
+    }
+    /* 30%{
+        transform: translateY(0) scaleY(1);
+        transform-origin: top;
+    } */
+    60%{
+        transform: translateY(400px) scaleY(1);
+        transform-origin: bottom;
+    }
+    80%{
+        transform: translateY(300px) scaleY(1);
+        transform-origin: bottom;
+    }
+    100%{
+        transform: translateY(300px) scaleY(0);
+        transform-origin: bottom;
+        text-shadow: -180px 0 0 var(--snow), 180px 0 0 var(--snow);
+        
+    }
+    
+}
