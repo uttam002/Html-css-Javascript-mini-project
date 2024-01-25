@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Kalnia:wght@300&display=swap');
+
+*{
+    margin: 0;
+    user-select: none;
+    padding: 0;
+    box-sizing: border-box;
+} 
+body{
+    font-family: 'Kalnia', serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: url('bg2.jpg') no-repeat;
+    background-size: cover;
+    background-position: center;
+    /* background-image: url("bg2.jpg"); */
+    color: aliceblue;
+ }
+ .hedder{
+    display: flex;
+    flex-direction: row-reverse;    
+ }
+ #logo1{
+    height: 35px;
+    margin: 6px 10px;
+    ruby-align: center;
+    border-radius: 40px;
+ }
+ #battlefield{
+    max-width: 370px;
+    mix-blend-mode:color-dodge;
+ }
+ .footer{
+    margin: 0;
+    padding: 20px 10px;
+    display: flex;
+    flex-direction: row;
+ }
+ .btn{
+    position: relative;
+    padding: 15px;
+    background-color: rgb(255, 255, 255);
+    color: #000000;
+    border-radius: 30px;
+    font-size: 20px;
+    font-weight: 600;
+    border-color: black;
+ }
+ .btn:active{
+    color: #ffffff;
+    background-color: rgb(146, 12, 12);
+ }
+ #back{
+    position: relative;
+    cursor: alias;
+    margin-right: 15px;
+ }
+ #shuffle{
+    font-size: 23px;
+    position: relative;
+    cursor: help;
+    margin-right: 15px;
+ }
+ #shuffle:active{
+    background-color: rgb(44, 213, 22);
+ }
