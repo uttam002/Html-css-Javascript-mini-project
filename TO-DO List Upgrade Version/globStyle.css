@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Kalnia:wght@300&display=swap');
+*{
+    margin: 0;
+    user-select: none;
+    padding: 0;
+    box-sizing: border-box;
+} 
+body{
+    font-family: 'Kalnia', serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #100f0e;
+    color: aliceblue;
+ }
+ .main{
+    background-color: rgb(255, 106, 0);
+    border-radius: 15px;
+    display: flex;
+    padding: 10px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow:20px 20px #ffffff;
+ }
+ .heading{
+    text-align: center;
+    font-size: 1.5em;  
+ }
+.listEmoji{
+    width: 400px;
+    mix-blend-mode: multiply;
+}
+ .make_list{
+    position: relative;
+    padding: 15px;
+    background-color: rgb(255, 255, 255);
+    color: #000000;
+    border-radius: 30px;
+    font-size: 24px;
+    font-weight: 600;
+    border-color: black;
+    cursor: alias;
+ }
+ make_list:active{
+    color: #ffffff;
+    background-color: rgb(41, 146, 12);
+ }

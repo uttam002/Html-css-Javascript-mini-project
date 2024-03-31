@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 8</title>
+    <link rel="stylesheet" href="globStyle.css">
+</head>
+<body>
+    <div class="main">
+        <h1 class="heading">TO-DO List</h1>
+        <img src="listEmoji.jpg" alt="List Emoji" class="listEmoji">
+        <button class="make_list">Make List</button>
+    </div>
+</body>
+<script>
+    const btnLink = document.querySelector('.make_list');
+    btnLink.addEventListener("click",()=>{
+        location.replace("Make_List.html")
+    });
+</script>
+</html>

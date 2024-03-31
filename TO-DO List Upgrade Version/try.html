@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        #todo-container {
+            max-width: 400px;
+            margin: 50px auto;
+        }
+
+        input[type="text"] {
+            width: 70%;
+            padding: 10px;
+            margin: 5px;
+        }
+
+        button {
+            padding: 10px;
+            margin: 5px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        li.completed {
+            text-decoration: line-through;
+            color: #777;
+        }   
+    </style>
+</head>
+<body>
+
+<div id="todo-container">
+    <h2>To-Do List</h2>
+    <input type="text" id="taskInput" placeholder="Add a new task">
+    <button onclick="addTask()">Add</button>
+    <ul id="taskList"></ul>
+</div>
+
+<script>
+    function addTask() {
+        const input = document.getElementById('taskInput');
+        const taskList = document.getElementById('taskList');
+
+        if (input.value.trim() !== '') {
+            const task = document.createElement('li');
+            task.innerHTML = `
+                <span>${input.value}</span>
+                <button onclick="completeTask(this)">Complete</button>
+                <button onclick="deleteTask(this)">Delete</button>
+            `;
+            taskList.appendChild(task);
+            input.value = '';
+        }
+    }
+
+    function completeTask(button) {
+        const task = button.parentElement;
+        task.classList.toggle('completed');
+    }
+
+    function deleteTask(button) {
+        const task = button.parentElement;
+        task.remove();
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List with Dates</title>
+    <style>
+        /* Add your CSS styles here */
+    </style>
+</head>
+<body>
+
+<h1>To-Do List with Dates</h1>
+
+<form id="taskForm">
+    <label for="task">Task:</label>
+    <input type="text" id="task" required>
+
+    <label for="dueDate">Due Date:</label>
+    <input type="date" id="dueDate" required>
+
+    <button type="button" onclick="addTask()">Add Task</button>
+</form>
+
+<div id="tasksContainer">
+    <!-- Tasks will be dynamically added here -->
+</div>
+
+<script>
+    function addTask() {
+        var taskInput = document.getElementById('task');
+        var dueDateInput = document.getElementById('dueDate');
+
+        var task = taskInput.value;
+        var dueDate = dueDateInput.value;
+
+        if (task.trim() === '' || dueDate.trim() === '') {
+            alert('Please enter both task and due date.');
+            return;
+        }
+
+        var taskObject = {
+            task: task,
+            dueDate: dueDate
+        };
+
+        // Retrieve existing tasks from local storage
+        var existingTasks = JSON.parse(localStorage.getItem('tasks')) || [];
+
+        // Add the new task to the array
+        existingTasks.push(taskObject);
+
+        // Save the updated array back to local storage
+        localStorage.setItem('tasks', JSON.stringify(existingTasks));
+
+        // Clear input fields
+        taskInput.value = '';
+        dueDateInput.value = '';
+
+        // Update the displayed tasks
+        displayTasks();
+    }
+
+    function displayTasks() {
+        var tasksContainer = document.getElementById('tasksContainer');
+        tasksContainer.innerHTML = '';
+
+        // Retrieve tasks from local storage
+        var tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+
+        tasks.forEach(function(taskObject) {
+            var taskElement = document.createElement('div');
+            taskElement.innerHTML = '<strong>' + taskObject.task + '</strong> - Due Date: ' + taskObject.dueDate;
+            tasksContainer.appendChild(taskElement);
+        });
+    }
+
+    // Initial display of tasks when the page loads
+    displayTasks();
+</script>
+
+</body>
+</html>
