@@ -1,0 +1,417 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Add Blog - InsightPress</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="../assets/css/style.css">
+        <link rel="stylesheet" href="modal-auth.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+        <style>
+        .add-blog-main {
+            display: flex; gap: 2.5rem;
+            align-items: flex-start;
+            justify-content: center;
+            margin-top: 2rem;
+            margin-bottom: 3rem;
+        }
+        .add-blog-form {
+            background: var(--card-bg);
+            box-shadow: var(--card-shadow);
+            border-radius: 1.5rem;
+            padding: 2.1rem 1.3rem;
+            max-width: 440px;
+            min-width: 330px;
+            position: relative;
+            z-index: 2;
+            margin: 0;
+        }
+        .add-blog-form .form-label {
+            font-weight: 600;
+            color: var(--primary);
+        }
+        .add-blog-form .form-control, .add-blog-form .form-select {
+            border-radius: 1rem;
+            background: #f5f7fa;
+            border: 1px solid #e3e7f0;
+            transition: box-shadow .2s;
+            box-shadow: none;
+        }
+        .add-blog-form .form-control:focus, .add-blog-form .form-select:focus {
+            border-color: #2d8cf0;
+            box-shadow: 0 0 0 2px rgba(45,140,240,0.13);
+        }
+        .add-blog-form .btn-primary {
+            border-radius: 1.2rem;
+            font-weight: 700;
+            font-size: 1.15rem;
+            padding: .7rem 0;
+            box-shadow: 0 4px 16px rgba(45,140,240,0.07);
+        }
+        .add-blog-form .form-text {
+            font-size: 1em;
+        }
+        .image-preview {
+            width: 100%;
+            max-width: 300px;
+            margin-top: 10px;
+            border-radius: 1rem;
+            box-shadow: 0 2px 8px rgba(45,140,240,0.07);
+            display: none;
+        }
+        .blog-success-message {
+            text-align:center;
+            padding:2rem 1rem 0.5rem 1rem;
+            color: #299e4a;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        /* Live Preview */
+        .blog-preview-card {
+            background: var(--card-bg);
+            box-shadow: var(--card-shadow);
+            border-radius: 1.5rem;
+            max-width: 420px;
+            min-width: 300px;
+            min-height: 450px;
+            padding: 1.7rem 1.3rem 1.1rem 1.3rem;
+            position: sticky;
+            top: 2.5rem;
+            z-index: 1;
+            margin: 0;
+        }
+        .blog-preview-card .preview-image {
+            width: 100%; max-width: 370px; height: 185px; object-fit: cover;
+            border-radius: 1rem;
+            margin-bottom: 1.1rem;
+            background: #f5f7fa;
+        }
+        .blog-preview-card .preview-title {
+            font-size: 1.28rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: .22rem;
+        }
+        .blog-preview-card .preview-subtitle {
+            font-size: 1.07rem;
+            font-weight: 500;
+            color: #4e7bbf;
+            margin-bottom: .5rem;
+        }
+        .blog-preview-card .preview-meta {
+            font-size: 0.98rem;
+            color: #888;
+            margin-bottom: .2rem;
+        }
+        .blog-preview-card .preview-tags {
+            margin-bottom: .7rem;
+        }
+        .blog-preview-card .badge {
+            background: #e6f2ff;
+            color: #2d8cf0;
+            font-size: .92rem;
+            margin-right: .3rem;
+            border-radius: .7rem;
+        }
+        .blog-preview-card .preview-content {
+            margin-top: 1.1rem;
+            font-size: 1.05rem;
+            color: #333;
+            min-height: 48px;
+            white-space: pre-line;
+        }
+        .blog-preview-card .preview-summary {
+            margin-top: 1.1rem;
+            font-size: .97rem;
+            color: #427c2d;
+            background: #f6fbee;
+            padding: .41rem .8rem;
+            border-radius: .8rem;
+        }
+        @media (max-width: 991px) {
+            .add-blog-main {
+            flex-direction: column;
+            align-items: stretch;
+            }
+            .blog-preview-card {
+            max-width: 100%; min-width: 0;
+            margin-top: 2.5rem;
+            position: static;
+            }
+        }
+        @media (max-width: 576px) {
+            .add-blog-form {
+                padding: 1.2rem 0.7rem;
+            }
+            .blog-preview-card {
+                padding: 1.1rem .2rem;
+            }
+        }
+        </style>
+    </head>
+    <body>
+        <!-- Particle Dots Animated Background (GLOBAL) -->
+        <div class="particle-bg">
+            <div class="particle-dot"></div>
+            <div class="particle-dot"></div>
+            <div class="particle-dot"></div>
+            <div class="particle-dot"></div>
+            <div class="particle-dot"></div>
+            <div class="particle-dot"></div>
+            <div class="particle-dot"></div>
+            <div class="particle-dot"></div>
+            <div class="particle-dot"></div>
+            <div class="particle-dot"></div>
+        </div>
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-3">
+            <div class="container">
+                <a class="navbar-brand fw-bold fs-3" href="#">Insight<span class="text-primary">Press</span></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                    <ul class="navbar-nav mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Articles</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Categories</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+                    </ul>
+                    <div id="authArea" class="ms-3 d-flex align-items-center"></div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Auth Modal (keep as on home page) -->
+        <div class="modal fade modal-auth" id="authModal" tabindex="-1" aria-labelledby="authModalLabel" aria-hidden="true"></div>
+
+        <!-- Hero Section (Short) -->
+        <header class="hero-section d-flex align-items-center justify-content-center text-center" style="min-height:36vh;">
+            <div class="hero-anim-bg">
+                <div class="hero-bubble"></div>
+                <div class="hero-bubble"></div>
+                <div class="hero-bubble"></div>
+                <div class="hero-bubble"></div>
+                <div class="hero-bubble"></div>
+            </div>
+            <div class="container">
+                <h1 class="display-5 fw-bold mb-1 animate__animated animate__fadeInDown">Add New <span class="text-primary">Blog</span></h1>
+                <p class="lead mb-2 animate__animated animate__fadeInUp">Share your insights, stories or tutorials with the world.</p>
+            </div>
+            <svg class="hero-wave" viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill="#f5f7fa" fill-opacity="1"
+                    d="M0,32L60,26.7C120,21,240,11,360,21.3C480,32,600,64,720,74.7C840,85,960,75,1080,58.7C1200,43,1320,21,1380,10.7L1440,0V80H1380C1320,80,1200,80,1080,80C960,80,840,80,720,80C600,80,480,80,360,80C240,80,120,80,60,80H0Z">
+                </path>
+            </svg>
+        </header>
+
+        <!-- Add Blog Form + Live Preview -->
+        <div class="container add-blog-main">
+        <!-- BLOG FORM -->
+        <form class="add-blog-form shadow animate__animated animate__fadeInUp" id="addBlogForm" autocomplete="off">
+            <h2 class="text-center mb-4 section-title">Blog Details</h2>
+            <div class="mb-3">
+            <label for="blogTitle" class="form-label">Title <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="blogTitle" name="title" maxlength="120" placeholder="Enter blog title" required>
+            </div>
+            <div class="mb-3">
+            <label for="blogSubtitle" class="form-label">Subtitle</label>
+            <input type="text" class="form-control" id="blogSubtitle" name="subtitle" maxlength="160" placeholder="A short subtitle (optional)">
+            </div>
+            <div class="mb-3">
+            <label for="blogCategory" class="form-label">Category <span class="text-danger">*</span></label>
+            <select class="form-select" id="blogCategory" name="category" required>
+                <option value="">Select category</option>
+                <option value="Tech">Tech</option>
+                <option value="Career">Career</option>
+                <option value="Life">Life</option>
+                <option value="Tutorial">Tutorial</option>
+                <option value="Insight">Insight</option>
+                <option value="Opinion">Opinion</option>
+                <option value="News">News</option>
+                <option value="Other">Other</option>
+            </select>
+            </div>
+            <div class="mb-3">
+            <label for="blogTags" class="form-label">Tags <small class="text-muted">(comma separated)</small></label>
+            <input type="text" class="form-control" id="blogTags" name="tags" maxlength="80" placeholder="e.g. Angular, Productivity">
+            </div>
+            <div class="mb-3">
+            <label for="blogContent" class="form-label">Content <span class="text-danger">*</span></label>
+            <textarea class="form-control" id="blogContent" name="content" rows="10" maxlength="6000" placeholder="Write your blog here..." required></textarea>
+            <div class="form-text text-end"><span id="contentCount">0</span> / 6000 chars</div>
+            </div>
+            <div class="mb-3">
+            <label for="blogImage" class="form-label">Featured Image <small class="text-muted">(jpg/png, max 2MB)</small></label>
+            <input class="form-control" type="file" id="blogImage" accept="image/*">
+            <img id="imagePreview" class="image-preview" alt="Preview" />
+            </div>
+            <div class="row mb-3">
+            <div class="col-md-6 mb-2 mb-md-0">
+                <label for="blogAuthor" class="form-label">Author <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="blogAuthor" name="author" maxlength="40" placeholder="Your name" required>
+            </div>
+            <div class="col-md-6">
+                <label for="blogDate" class="form-label">Date <span class="text-danger">*</span></label>
+                <input type="date" class="form-control" id="blogDate" name="date" required>
+            </div>
+            </div>
+            <div class="mb-3">
+            <label for="blogSummary" class="form-label">Summary <small class="text-muted">(1-2 sentences, for preview cards)</small></label>
+            <textarea class="form-control" id="blogSummary" name="summary" rows="2" maxlength="200" placeholder="Short summary for blog cards"></textarea>
+            </div>
+            <div class="d-grid gap-2 mt-4">
+            <button type="submit" class="btn btn-primary btn-lg">Publish Blog</button>
+            </div>
+            <div id="blogFormMsg" class="form-text mt-3 text-center"></div>
+        </form>
+        <!-- BLOG PREVIEW -->
+        <div class="blog-preview-card shadow animate__animated animate__fadeInUp" id="blogLivePreview">
+            <img src="" class="preview-image" id="previewImage" style="display:none;" alt="Featured">
+            <div class="preview-title" id="previewTitle">Blog Title...</div>
+            <div class="preview-subtitle" id="previewSubtitle"></div>
+            <div class="preview-meta">
+            <span id="previewCategory" class="badge"></span>
+            <span id="previewAuthor">By ...</span>
+            <span id="previewDate"></span>
+            </div>
+            <div class="preview-tags" id="previewTags"></div>
+            <div class="preview-summary" id="previewSummary" style="display:none;"></div>
+            <div class="preview-content" id="previewContent"></div>
+        </div>
+        </div>
+        <!-- Blog Success Message -->
+        <div class="container">
+        <div id="blogSuccessMsg" class="blog-success-message d-none">
+            <i class="fa fa-check-circle me-2"></i>Blog posted successfully! <br>
+            <a href="index.html" class="btn btn-outline-primary mt-3">Go Home</a>
+        </div>
+        </div>
+
+        <!-- Footer (as before) -->
+        <footer class="footer bg-white py-4">
+            <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
+                <div class="mb-2 mb-md-0">
+                    <span class="fw-bold">InsightPress</span> &copy; 2025. All rights reserved.
+                </div>
+                <div>
+                    <a href="#" class="text-secondary me-3"><i class="fab fa-facebook fa-lg"></i></a>
+                    <a href="#" class="text-secondary me-3"><i class="fab fa-twitter fa-lg"></i></a>
+                    <a href="#" class="text-secondary me-3"><i class="fab fa-linkedin fa-lg"></i></a>
+                    <a href="#" class="text-secondary"><i class="fab fa-instagram fa-lg"></i></a>
+                </div>
+            </div>
+        </footer>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="../assets/js/main.js"></script>
+        <script src="modal-auth.js"></script>
+        <script>
+        function escapeHTML(str) {
+            return str.replace(/[&<>"']/g, function(m) {
+            switch(m) {
+                case '&': return '&amp;';
+                case '<': return '&lt;';
+                case '>': return '&gt;';
+                case '"': return '&quot;';
+                case "'": return '&#39;';
+            }
+            });
+        }
+        function nl2br(str) {
+            return str.replace(/\n/g, "<br>");
+        }
+        // Live Preview logic
+        function updatePreview() {
+            $('#previewTitle').text($('#blogTitle').val() || 'Blog Title...');
+            $('#previewSubtitle').text($('#blogSubtitle').val());
+            // Category badge
+            let cat = $('#blogCategory').val();
+            $('#previewCategory').text(cat).toggle(!!cat);
+            // Author
+            $('#previewAuthor').text($('#blogAuthor').val() ? 'By ' + $('#blogAuthor').val() : 'By ...');
+            // Date
+            let date = $('#blogDate').val();
+            $('#previewDate').text(date ? ' | ' + date : '');
+            // Tags
+            let tags = ($('#blogTags').val() || '').split(',').map(x=>x.trim()).filter(Boolean);
+            $('#previewTags').html(tags.map(t=>`<span class="badge">${escapeHTML(t)}</span>`).join(' '));
+            // Summary
+            let summary = $('#blogSummary').val();
+            $('#previewSummary').html(escapeHTML(summary)).toggle(!!summary);
+            // Content
+            $('#previewContent').html(nl2br(escapeHTML($('#blogContent').val())));
+        }
+        $('#blogTitle, #blogSubtitle, #blogCategory, #blogTags, #blogAuthor, #blogDate, #blogSummary, #blogContent').on('input change', updatePreview);
+
+        // Update content char count
+        $('#blogContent').on('input', function() {
+            $('#contentCount').text($(this).val().length);
+        });
+
+        // Image preview logic (and preview card image)
+        $('#blogImage').on('change', function(){
+            const file = this.files[0];
+            if(file){
+            if(file.size > 2*1024*1024){
+                $('#blogFormMsg').addClass('text-danger').text('Image must be less than 2MB.');
+                $('#imagePreview').hide();
+                $('#previewImage').hide();
+                $(this).val('');
+                return;
+            }
+            const reader = new FileReader();
+            reader.onload = function(e){
+                $('#imagePreview').attr('src', e.target.result).show();
+                $('#previewImage').attr('src', e.target.result).show();
+            };
+            reader.readAsDataURL(file);
+            } else {
+            $('#imagePreview').hide();
+            $('#previewImage').hide();
+            }
+        });
+
+        // Blog form submit logic (demo, enhance with API as needed)
+        $('#addBlogForm').submit(function(e){
+            e.preventDefault();
+            $('#blogFormMsg').removeClass('text-danger text-success').text('');
+            const title = $('#blogTitle').val().trim();
+            const category = $('#blogCategory').val();
+            const content = $('#blogContent').val().trim();
+            const author = $('#blogAuthor').val().trim();
+            const date = $('#blogDate').val();
+            if(!title || !category || !content || !author || !date) {
+            $('#blogFormMsg').addClass('text-danger').text('Please fill in all required fields.');
+            return;
+            }
+            if(content.length > 6000) {
+            $('#blogFormMsg').addClass('text-danger').text('Blog content exceeds 6000 characters.');
+            return;
+            }
+            const image = $('#blogImage')[0].files[0];
+            if(image && image.size > 2*1024*1024){
+            $('#blogFormMsg').addClass('text-danger').text('Image must be less than 2MB.');
+            return;
+            }
+            $('#blogFormMsg').removeClass('text-danger').addClass('text-success').text('Publishing blog...');
+            setTimeout(function(){
+            $('.add-blog-main').hide();
+            $('#blogSuccessMsg').removeClass('d-none');
+            }, 1200);
+        });
+
+        // Set default date to today
+        $(function() {
+            let today = new Date().toISOString().split('T')[0];
+            $('#blogDate').val(today);
+            updatePreview();
+        });
+        </script>
+    </body>
+    </html>
+    
