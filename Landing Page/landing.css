@@ -26,6 +26,7 @@ body {
     z-index: 1;
     transition: filter 0.24s cubic-bezier(.87,-0.41,.19,1.44), transform 0.22s cubic-bezier(.87,-0.41,.19,1.44);
 }
+
 #heroTitle:hover,
 #heroTitle:focus {
     transform: scale(1.045) rotate(-1.2deg) skewX(-3deg);
