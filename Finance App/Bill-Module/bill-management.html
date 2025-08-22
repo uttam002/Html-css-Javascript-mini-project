@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bill Management - Financial Dashboard</title>
+    <link rel="stylesheet" href="bill-styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Left Sidebar (same as other modules) -->
+        <aside class="left-sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-chart-line"></i>
+                    <span>FinanceApp</span>
+                </div>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="nav-item">
+                        <a href="../Dashboard/index.html" class="nav-link">
+                            <i class="fas fa-chart-bar"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="../Budget Management/budget-management.html" class="nav-link">
+                            <i class="fas fa-chart-pie"></i>
+                            <span>Budget Management</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="../Transaction-Module/transaction-management.html" class="nav-link">
+                            <i class="fas fa-exchange-alt"></i>
+                            <span>Transactions</span>
+                        </a>
+                    </li>
+                    <li class="nav-item active">
+                        <a href="../Bill-Module/bill-management.html" class="nav-link">
+                            <i class="fas fa-file-invoice"></i>
+                            <span>Bills</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="../Reminder-Module/reminder-management.html" class="nav-link">
+                            <i class="fas fa-bell"></i>
+                            <span>Reminders</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="../Settings/index.html" class="nav-link">
+                            <i class="fas fa-cog"></i>
+                            <span>Settings</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="user-details">
+                        <span class="user-name">uttam002</span>
+                        <span class="user-role">Admin</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Header Section with Notifications -->
+            <header class="page-header">
+                <div class="header-content">
+                    <h1><i class="fas fa-file-invoice"></i> Bill Management</h1>
+                    <p>Track and manage all your recurring bills and payments</p>
+                </div>
+                
+                <div class="header-right">
+                    <div class="header-stats">
+                        <div class="stat-card pending">
+                            <span class="stat-value" id="pendingBills">0</span>
+                            <span class="stat-label">Pending Bills</span>
+                        </div>
+                        <div class="stat-card overdue">
+                            <span class="stat-value" id="overdueBills">0</span>
+                            <span class="stat-label">Overdue</span>
+                        </div>
+                        <div class="stat-card total">
+                            <span class="stat-value" id="monthlyTotal">$0</span>
+                            <span class="stat-label">Monthly Total</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Notification Bell -->
+                    <div class="notification-bell" onclick="showNotificationCenter()">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge" id="notificationBadge">4</span>
+                        <div class="notification-dropdown" id="notificationDropdown">
+                            <div class="notification-header">
+                                <h4>Notifications</h4>
+                                <button class="view-all-btn" onclick="showNotificationCenter()">View All</button>
+                            </div>
+                            <div class="notification-list" id="quickNotificationList">
+                                <!-- Quick notifications will be loaded here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Smart Alert Bar -->
+            <div class="alert-bar" id="alertBar" style="display: none;">
+                <div class="alert-content">
+                    <div class="alert-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="alert-text" id="alertText"></div>
+                    <button class="alert-close" onclick="closeAlert()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Content Grid -->
+            <div class="content-grid">
+                <!-- Left Content Panel -->
+                <section class="bills-panel">
+                    <!-- Quick Actions -->
+                    <div class="quick-actions">
+                        <button class="action-btn primary" onclick="addBill()">
+                            <i class="fas fa-plus"></i>
+                            Add Bill
+                        </button>
+                        <button class="action-btn" onclick="showUpcomingBills()">
+                            <i class="fas fa-calendar-alt"></i>
+                            Upcoming
+                        </button>
+                        <button class="action-btn" onclick="showBillAnalysis()">
+                            <i class="fas fa-chart-line"></i>
+                            Analysis
+                        </button>
+                        <button class="action-btn" onclick="exportBills()">
+                            <i class="fas fa-download"></i>
+                            Export
+                        </button>
+                    </div>
+
+                    <!-- Filter and Search Controls -->
+                    <div class="filter-section">
+                        <h3>Bills Overview</h3>
+                        <div class="filter-controls">
+                            <div class="filter-row">
+                                <select id="filterStatus" onchange="filterBills()">
+                                    <option value="all">All Bills</option>
+                                    <option value="pending">Pending</option>
+                                    <option value="paid">Paid</option>
+                                    <option value="overdue">Overdue</option>
+                                </select>
+                                <select id="filterCategory" onchange="filterBills()">
+                                    <option value="all">All Categories</option>
+                                    <option value="utilities">Utilities</option>
+                                    <option value="insurance">Insurance</option>
+                                    <option value="subscription">Subscriptions</option>
+                                    <option value="loan">Loans</option>
+                                    <option value="rent">Rent/Mortgage</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="search-box">
+                                <i class="fas fa-search"></i>
+                                <input type="text" id="searchBills" placeholder="Search bills..." 
+                                       oninput="searchBills()">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Bills List -->
+                    <div class="bills-list" id="billsList">
+                        <!-- Bills will be dynamically loaded here -->
+                    </div>
+                </section>
+
+                <!-- Right Details Panel -->
+                <section class="details-panel" id="detailsPanel">
+                    <div class="details-content" id="detailsContent">
+                        <!-- Welcome Screen -->
+                        <div class="welcome-screen" id="welcomeScreen">
+                            <div class="welcome-icon">
+                                <i class="fas fa-file-invoice"></i>
+                            </div>
+                            <h3>Welcome to Bill Management</h3>
+                            <p>Add recurring bills, track due dates, and never miss a payment. Select a bill from the left to view details or manage payments.</p>
+                            <div class="welcome-stats">
+                                <div class="welcome-stat">
+                                    <i class="fas fa-list"></i>
+                                    <span id="totalBills">0</span>
+                                    <label>Total Bills</label>
+                                </div>
+                                <div class="welcome-stat">
+                                    <i class="fas fa-clock"></i>
+                                    <span id="dueThisWeek">0</span>
+                                    <label>Due This Week</label>
+                                </div>
+                            </div>
+                            <div class="welcome-actions">
+                                <button class="btn btn-primary" onclick="addBill()">
+                                    <i class="fas fa-plus"></i>
+                                    Add Your First Bill
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Floating Notification Panel -->
+    <div class="floating-notification-panel" id="floatingNotificationPanel">
+        <div class="floating-panel-header">
+            <h3>
+                <i class="fas fa-bell"></i>
+                Live Notifications
+            </h3>
+            <button class="floating-panel-close" onclick="closeFloatingNotifications()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="floating-panel-content" id="floatingNotificationContent">
+            <!-- Live notifications will appear here -->
+        </div>
+    </div>
+
+    <!-- Bill Modal -->
+    <div class="bill-modal" id="billModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Add Bill</h3>
+                <button class="close-btn" onclick="closeBillModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="billForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="billName">Bill Name</label>
+                            <input type="text" id="billName" placeholder="e.g., Electric Bill" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="billAmount">Amount ($)</label>
+                            <input type="number" id="billAmount" min="0" step="0.01" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="billCategory">Category</label>
+                            <select id="billCategory" required>
+                                <option value="utilities">Utilities</option>
+                                <option value="insurance">Insurance</option>
+                                <option value="subscription">Subscriptions</option>
+                                <option value="loan">Loans</option>
+                                <option value="rent">Rent/Mortgage</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="billDueDate">Due Date</label>
+                            <input type="date" id="billDueDate" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="billFrequency">Frequency</label>
+                            <select id="billFrequency" required>
+                                <option value="monthly">Monthly</option>
+                                <option value="weekly">Weekly</option>
+                                <option value="quarterly">Quarterly</option>
+                                <option value="yearly">Yearly</option>
+                                <option value="one-time">One Time</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="billAccount">Payment Account</label>
+                            <select id="billAccount" required>
+                                <option value="checking">Checking Account</option>
+                                <option value="savings">Savings Account</option>
+                                <option value="credit">Credit Card</option>
+                                <option value="cash">Cash</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="billDescription">Description (Optional)</label>
+                        <textarea id="billDescription" placeholder="Additional notes about this bill..." rows="3"></textarea>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="billReminder">Reminder Days Before</label>
+                            <select id="billReminder">
+                                <option value="0">No Reminder</option>
+                                <option value="1">1 Day Before</option>
+                                <option value="3" selected>3 Days Before</option>
+                                <option value="7">7 Days Before</option>
+                                <option value="14">14 Days Before</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="billAutoReminder">Auto Reminders</label>
+                            <div class="checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="billAutoReminder" checked>
+                                    <span class="checkmark"></span>
+                                    Enable automatic reminders
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary" onclick="closeBillModal()">Cancel</button>
+                        <button type="submit" class="btn-primary">Add Bill</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment Modal -->
+    <div class="payment-modal" id="paymentModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Mark Bill as Paid</h3>
+                <button class="close-btn" onclick="closePaymentModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="paymentForm">
+                    <div class="payment-summary" id="paymentSummary">
+                        <!-- Payment summary will be populated by JS -->
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="paymentAmount">Actual Amount Paid ($)</label>
+                            <input type="number" id="paymentAmount" min="0" step="0.01" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="paymentDate">Payment Date</label>
+                            <input type="date" id="paymentDate" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="paymentMethod">Payment Method</label>
+                            <select id="paymentMethod" required>
+                                <option value="bank_transfer">Bank Transfer</option>
+                                <option value="credit_card">Credit Card</option>
+                                <option value="debit_card">Debit Card</option>
+                                <option value="cash">Cash</option>
+                                <option value="check">Check</option>
+                                <option value="auto_pay">Auto Pay</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="paymentReference">Reference/Transaction ID</label>
+                            <input type="text" id="paymentReference" placeholder="Optional reference number">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="paymentNotes">Notes (Optional)</label>
+                        <textarea id="paymentNotes" placeholder="Any additional notes about this payment..." rows="3"></textarea>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary" onclick="closePaymentModal()">Cancel</button>
+                        <button type="submit" class="btn-primary">Confirm Payment</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="bill-script.js"></script>
+</body>
+</html>

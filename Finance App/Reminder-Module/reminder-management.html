@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reminder Management - Financial Dashboard</title>
+    <link rel="stylesheet" href="reminder-styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Left Sidebar (same as other modules) -->
+        <aside class="left-sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-chart-line"></i>
+                    <span>FinanceApp</span>
+                </div>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="nav-item">
+                        <a href="../Dashboard/index.html" class="nav-link">
+                            <i class="fas fa-chart-bar"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="../Budget Management/budget-management.html" class="nav-link">
+                            <i class="fas fa-chart-pie"></i>
+                            <span>Budget Management</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="../Transaction-Module/transaction-management.html" class="nav-link">
+                            <i class="fas fa-exchange-alt"></i>
+                            <span>Transactions</span>
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a href="../Bill-Module/bill-management.html" class="nav-link">
+                            <i class="fas fa-file-invoice"></i>
+                            <span>Bills</span>
+                        </a>
+                    </li>
+                    <li class="nav-item active">
+                        <a href="../Reminder-Module/reminder-management.html" class="nav-link">
+                            <i class="fas fa-bell"></i>
+                            <span>Reminders</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="../Settings/" class="nav-link">
+                            <i class="fas fa-cog"></i>
+                            <span>Settings</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="user-details">
+                        <span class="user-name">uttam002</span>
+                        <span class="user-role">Admin</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Header Section with Notifications -->
+            <header class="page-header">
+                <div class="header-content">
+                    <h1><i class="fas fa-bell"></i> Reminder Management</h1>
+                    <p>Stay on top of all your financial commitments and deadlines</p>
+                </div>
+                
+                <div class="header-right">
+                    <div class="header-stats">
+                        <div class="stat-card active">
+                            <span class="stat-value" id="activeReminders">0</span>
+                            <span class="stat-label">Active Reminders</span>
+                        </div>
+                        <div class="stat-card upcoming">
+                            <span class="stat-value" id="upcomingToday">0</span>
+                            <span class="stat-label">Due Today</span>
+                        </div>
+                        <div class="stat-card overdue">
+                            <span class="stat-value" id="overdueReminders">0</span>
+                            <span class="stat-label">Overdue</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Notification Bell -->
+                    <div class="notification-bell" onclick="showNotificationCenter()">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge" id="notificationBadge">5</span>
+                        <div class="notification-dropdown" id="notificationDropdown">
+                            <div class="notification-header">
+                                <h4>Notifications</h4>
+                                <button class="view-all-btn" onclick="showNotificationCenter()">View All</button>
+                            </div>
+                            <div class="notification-list" id="quickNotificationList">
+                                <!-- Quick notifications will be loaded here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Smart Alert Bar -->
+            <div class="alert-bar" id="alertBar" style="display: none;">
+                <div class="alert-content">
+                    <div class="alert-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="alert-text" id="alertText"></div>
+                    <button class="alert-close" onclick="closeAlert()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Content Grid -->
+            <div class="content-grid">
+                <!-- Left Content Panel -->
+                <section class="reminders-panel">
+                    <!-- Quick Actions -->
+                    <div class="quick-actions">
+                        <button class="action-btn primary" onclick="addReminder()">
+                            <i class="fas fa-plus"></i>
+                            Add Reminder
+                        </button>
+                        <button class="action-btn" onclick="showTodaysReminders()">
+                            <i class="fas fa-calendar-day"></i>
+                            Today
+                        </button>
+                        <button class="action-btn" onclick="showReminderCalendar()">
+                            <i class="fas fa-calendar-alt"></i>
+                            Calendar
+                        </button>
+                        <button class="action-btn" onclick="syncReminders()">
+                            <i class="fas fa-sync-alt"></i>
+                            Sync
+                        </button>
+                    </div>
+
+                    <!-- Filter and Search Controls -->
+                    <div class="filter-section">
+                        <h3>All Reminders</h3>
+                        <div class="filter-controls">
+                            <div class="filter-row">
+                                <select id="filterStatus" onchange="filterReminders()">
+                                    <option value="all">All Status</option>
+                                    <option value="active">Active</option>
+                                    <option value="completed">Completed</option>
+                                    <option value="snoozed">Snoozed</option>
+                                    <option value="overdue">Overdue</option>
+                                </select>
+                                <select id="filterType" onchange="filterReminders()">
+                                    <option value="all">All Types</option>
+                                    <option value="bill">Bill Payment</option>
+                                    <option value="budget">Budget Review</option>
+                                    <option value="transaction">Transaction</option>
+                                    <option value="custom">Custom</option>
+                                </select>
+                            </div>
+                            <div class="filter-row">
+                                <select id="filterPriority" onchange="filterReminders()">
+                                    <option value="all">All Priorities</option>
+                                    <option value="high">High Priority</option>
+                                    <option value="medium">Medium Priority</option>
+                                    <option value="low">Low Priority</option>
+                                </select>
+                                <select id="filterTimeframe" onchange="filterReminders()">
+                                    <option value="all">All Time</option>
+                                    <option value="today">Today</option>
+                                    <option value="week">This Week</option>
+                                    <option value="month">This Month</option>
+                                </select>
+                            </div>
+                            <div class="search-box">
+                                <i class="fas fa-search"></i>
+                                <input type="text" id="searchReminders" placeholder="Search reminders..." 
+                                       oninput="searchReminders()">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Reminders List -->
+                    <div class="reminders-list" id="remindersList">
+                        <!-- Reminders will be dynamically loaded here -->
+                    </div>
+                </section>
+
+                <!-- Right Details Panel -->
+                <section class="details-panel" id="detailsPanel">
+                    <div class="details-content" id="detailsContent">
+                        <!-- Welcome Screen -->
+                        <div class="welcome-screen" id="welcomeScreen">
+                            <div class="welcome-icon">
+                                <i class="fas fa-bell"></i>
+                            </div>
+                            <h3>Welcome to Reminders</h3>
+                            <p>Stay organized with smart reminders for bills, budget reviews, and financial goals. Never miss important deadlines again.</p>
+                            <div class="welcome-stats">
+                                <div class="welcome-stat">
+                                    <i class="fas fa-list"></i>
+                                    <span id="totalReminders">0</span>
+                                    <label>Total Reminders</label>
+                                </div>
+                                <div class="welcome-stat">
+                                    <i class="fas fa-clock"></i>
+                                    <span id="pendingReminders">0</span>
+                                    <label>Pending</label>
+                                </div>
+                            </div>
+                            <div class="welcome-actions">
+                                <button class="btn btn-primary" onclick="addReminder()">
+                                    <i class="fas fa-plus"></i>
+                                    Create Your First Reminder
+                                </button>
+                                <button class="btn btn-secondary" onclick="syncReminders()">
+                                    <i class="fas fa-sync-alt"></i>
+                                    Sync with Bills
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Floating Notification Panel -->
+    <div class="floating-notification-panel" id="floatingNotificationPanel">
+        <div class="floating-panel-header">
+            <h3>
+                <i class="fas fa-bell"></i>
+                Live Notifications
+            </h3>
+            <button class="floating-panel-close" onclick="closeFloatingNotifications()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="floating-panel-content" id="floatingNotificationContent">
+            <!-- Live notifications will appear here -->
+        </div>
+    </div>
+
+    <!-- Reminder Modal -->
+    <div class="reminder-modal" id="reminderModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Add Reminder</h3>
+                <button class="close-btn" onclick="closeReminderModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="reminderForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="reminderTitle">Reminder Title</label>
+                            <input type="text" id="reminderTitle" placeholder="e.g., Pay Electric Bill" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="reminderType">Type</label>
+                            <select id="reminderType" required onchange="updateLinkedOptions()">
+                                <option value="custom">Custom Reminder</option>
+                                <option value="bill">Bill Payment</option>
+                                <option value="budget">Budget Review</option>
+                                <option value="transaction">Transaction Follow-up</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group" id="linkedItemGroup" style="display: none;">
+                        <label for="linkedItem">Link to Item</label>
+                        <select id="linkedItem">
+                            <!-- Options will be populated by JS based on type -->
+                        </select>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="reminderDate">Date</label>
+                            <input type="date" id="reminderDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="reminderTime">Time</label>
+                            <input type="time" id="reminderTime" value="09:00" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="reminderPriority">Priority</label>
+                            <select id="reminderPriority" required>
+                                <option value="low">Low Priority</option>
+                                <option value="medium" selected>Medium Priority</option>
+                                <option value="high">High Priority</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="reminderFrequency">Frequency</label>
+                            <select id="reminderFrequency" required>
+                                <option value="once">One Time</option>
+                                <option value="daily">Daily</option>
+                                <option value="weekly">Weekly</option>
+                                <option value="monthly">Monthly</option>
+                                <option value="yearly">Yearly</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="reminderDescription">Description (Optional)</label>
+                        <textarea id="reminderDescription" placeholder="Additional details about this reminder..." rows="3"></textarea>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="reminderNotification">Notification Method</label>
+                            <div class="checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="emailNotification" checked>
+                                    <span class="checkmark"></span>
+                                    Email Notification
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="pushNotification" checked>
+                                    <span class="checkmark"></span>
+                                    Push Notification
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="smsNotification">
+                                    <span class="checkmark"></span>
+                                    SMS Notification
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="snoozeOptions">Snooze Options</label>
+                            <select id="snoozeOptions">
+                                <option value="5">5 minutes</option>
+                                <option value="15">15 minutes</option>
+                                <option value="30">30 minutes</option>
+                                <option value="60" selected>1 hour</option>
+                                <option value="1440">1 day</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary" onclick="closeReminderModal()">Cancel</button>
+                        <button type="submit" class="btn-primary">Create Reminder</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Snooze Modal -->
+    <div class="snooze-modal" id="snoozeModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Snooze Reminder</h3>
+                <button class="close-btn" onclick="closeSnoozeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="snooze-summary" id="snoozeSummary">
+                    <!-- Snooze summary will be populated by JS -->
+                </div>
+                
+                <div class="snooze-options">
+                    <h4>Snooze for:</h4>
+                    <div class="snooze-buttons">
+                        <button class="snooze-btn" onclick="snoozeReminder(5)">5 minutes</button>
+                        <button class="snooze-btn" onclick="snoozeReminder(15)">15 minutes</button>
+                        <button class="snooze-btn" onclick="snoozeReminder(30)">30 minutes</button>
+                        <button class="snooze-btn" onclick="snoozeReminder(60)">1 hour</button>
+                        <button class="snooze-btn" onclick="snoozeReminder(240)">4 hours</button>
+                        <button class="snooze-btn" onclick="snoozeReminder(1440)">1 day</button>
+                    </div>
+                </div>
+                
+                <div class="custom-snooze">
+                    <h4>Custom Snooze:</h4>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <input type="datetime-local" id="customSnoozeTime">
+                        </div>
+                        <button type="button" class="btn btn-primary" onclick="customSnoozeReminder()">
+                            Set Custom Time
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" onclick="closeSnoozeModal()">Cancel</button>
+                    <button type="button" class="btn btn-primary" onclick="markReminderComplete()">
+                        Mark as Complete
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="reminder-script.js"></script>
+</body>
+</html>
