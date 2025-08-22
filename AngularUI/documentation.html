@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation - AngularUI Pro</title>
+    <link rel="stylesheet" href="documentation.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="index.html" class="brand-link">
+                    <i class="fas fa-cube brand-icon"></i>
+                    <span>AngularUI Pro</span>
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="components.html" class="nav-link">Components</a>
+                <a href="#" class="nav-link active">Documentation</a>
+                <a href="#" class="nav-link">Examples</a>
+                <div class="version-badge">v2.1.0</div>
+            </div>
+            <div class="nav-actions">
+                <button class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
+                    <i class="fas fa-moon" id="themeIcon"></i>
+                </button>
+                <a href="https://github.com/uttam002/angular-ui-pro" class="github-link" target="_blank">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-container">
+        <!-- Sidebar Navigation -->
+        <aside class="docs-sidebar">
+            <div class="sidebar-header">
+                <div class="search-container">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" placeholder="Search docs..." id="docsSearch" onkeyup="searchDocs()">
+                    <kbd class="search-shortcut">⌘K</kbd>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <!-- Getting Started -->
+                <div class="nav-section">
+                    <div class="section-header" onclick="toggleSection('getting-started')">
+                        <i class="fas fa-rocket"></i>
+                        <span>Getting Started</span>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="section-items open" id="getting-started">
+                        <a href="#installation" class="nav-item active">Installation</a>
+                        <a href="#quick-start" class="nav-item">Quick Start</a>
+                        <a href="#configuration" class="nav-item">Configuration</a>
+                        <a href="#theming" class="nav-item">Theming</a>
+                        <a href="#migration" class="nav-item">Migration Guide</a>
+                    </div>
+                </div>
+
+                <!-- Components -->
+                <div class="nav-section">
+                    <div class="section-header" onclick="toggleSection('components-docs')">
+                        <i class="fas fa-puzzle-piece"></i>
+                        <span>Components</span>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="section-items" id="components-docs">
+                        <a href="#button-docs" class="nav-item">Button</a>
+                        <a href="#form-controls" class="nav-item">Form Controls</a>
+                        <a href="#navigation-docs" class="nav-item">Navigation</a>
+                        <a href="#feedback-docs" class="nav-item">Feedback</a>
+                        <a href="#layout-docs" class="nav-item">Layout</a>
+                        <a href="#data-display" class="nav-item">Data Display</a>
+                    </div>
+                </div>
+
+                <!-- API Reference -->
+                <div class="nav-section">
+                    <div class="section-header" onclick="toggleSection('api-reference')">
+                        <i class="fas fa-code"></i>
+                        <span>API Reference</span>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="section-items" id="api-reference">
+                        <a href="#interfaces" class="nav-item">Interfaces</a>
+                        <a href="#services" class="nav-item">Services</a>
+                        <a href="#directives" class="nav-item">Directives</a>
+                        <a href="#pipes" class="nav-item">Pipes</a>
+                        <a href="#tokens" class="nav-item">Injection Tokens</a>
+                    </div>
+                </div>
+
+                <!-- Guides -->
+                <div class="nav-section">
+                    <div class="section-header" onclick="toggleSection('guides')">
+                        <i class="fas fa-book"></i>
+                        <span>Guides</span>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="section-items" id="guides">
+                        <a href="#accessibility" class="nav-item">Accessibility</a>
+                        <a href="#performance" class="nav-item">Performance</a>
+                        <a href="#testing" class="nav-item">Testing</a>
+                        <a href="#best-practices" class="nav-item">Best Practices</a>
+                        <a href="#troubleshooting" class="nav-item">Troubleshooting</a>
+                    </div>
+                </div>
+
+                <!-- Resources -->
+                <div class="nav-section">
+                    <div class="section-header" onclick="toggleSection('resources')">
+                        <i class="fas fa-folder-open"></i>
+                        <span>Resources</span>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="section-items" id="resources">
+                        <a href="#changelog" class="nav-item">Changelog</a>
+                        <a href="#contributing" class="nav-item">Contributing</a>
+                        <a href="#support" class="nav-item">Support</a>
+                        <a href="#examples" class="nav-item">Examples</a>
+                    </div>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="docs-content">
+            <div class="content-header">
+                <div class="breadcrumb">
+                    <a href="index.html">Home</a>
+                    <i class="fas fa-chevron-right"></i>
+                    <span>Documentation</span>
+                    <i class="fas fa-chevron-right"></i>
+                    <span id="currentPage">Installation</span>
+                </div>
+                <div class="content-actions">
+                    <button class="action-btn" onclick="editOnGitHub()">
+                        <i class="fab fa-github"></i>
+                        Edit on GitHub
+                    </button>
+                    <button class="action-btn" onclick="sharePage()">
+                        <i class="fas fa-share"></i>
+                        Share
+                    </button>
+                </div>
+            </div>
+
+            <!-- Documentation Sections -->
+            <div class="docs-sections">
+                <!-- Installation Section -->
+                <section id="installation" class="doc-section">
+                    <div class="section-header">
+                        <h1>Installation</h1>
+                        <div class="section-meta">
+                            <span class="last-updated">Last updated: August 22, 2025</span>
+                            <span class="reading-time">3 min read</span>
+                        </div>
+                    </div>
+
+                    <div class="section-content">
+                        <p class="lead">
+                            Get started with AngularUI Pro by installing the package via npm and setting up your first component.
+                        </p>
+
+                        <div class="content-block">
+                            <h2>Prerequisites</h2>
+                            <p>Before installing AngularUI Pro, make sure you have the following:</p>
+                            <ul>
+                                <li>Angular 15.0.0 or higher</li>
+                                <li>Node.js 16.0.0 or higher</li>
+                                <li>npm 7.0.0 or higher</li>
+                            </ul>
+                        </div>
+
+                        <div class="content-block">
+                            <h2>Package Installation</h2>
+                            <p>Install AngularUI Pro using npm or yarn:</p>
+                            
+                            <div class="code-tabs">
+                                <button class="code-tab active" onclick="showCodeExample('npm')">npm</button>
+                                <button class="code-tab" onclick="showCodeExample('yarn')">yarn</button>
+                                <button class="code-tab" onclick="showCodeExample('pnpm')">pnpm</button>
+                            </div>
+
+                            <div class="code-examples">
+                                <div id="npm-example" class="code-example active">
+                                    <div class="code-header">
+                                        <span>Terminal</span>
+                                        <button class="copy-btn" onclick="copyCode('npm install @uttam002/angular-ui-pro')">
+                                            <i class="fas fa-copy"></i>
+                                        </button>
+                                    </div>
+                                    <pre><code class="language-bash">npm install @uttam002/angular-ui-pro</code></pre>
+                                </div>
+
+                                <div id="yarn-example" class="code-example">
+                                    <div class="code-header">
+                                        <span>Terminal</span>
+                                        <button class="copy-btn" onclick="copyCode('yarn add @uttam002/angular-ui-pro')">
+                                            <i class="fas fa-copy"></i>
+                                        </button>
+                                    </div>
+                                    <pre><code class="language-bash">yarn add @uttam002/angular-ui-pro</code></pre>
+                                </div>
+
+                                <div id="pnpm-example" class="code-example">
+                                    <div class="code-header">
+                                        <span>Terminal</span>
+                                        <button class="copy-btn" onclick="copyCode('pnpm add @uttam002/angular-ui-pro')">
+                                            <i class="fas fa-copy"></i>
+                                        </button>
+                                    </div>
+                                    <pre><code class="language-bash">pnpm add @uttam002/angular-ui-pro</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="content-block">
+                            <h2>Module Import</h2>
+                            <p>Import the AngularUI Pro module in your app module:</p>
+                            
+                            <div class="code-block">
+                                <div class="code-header">
+                                    <span>app.module.ts</span>
+                                    <button class="copy-btn" onclick="copyCodeBlock('module-import')">
+                                        <i class="fas fa-copy"></i>
+                                    </button>
+                                </div>
+                                <pre><code id="module-import" class="language-typescript">import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { AngularUiProModule } from '@uttam002/angular-ui-pro';
+
+import { AppComponent } from './app.component';
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    AngularUiProModule // Add this line
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }</code></pre>
+                            </div>
+                        </div>
+
+                        <div class="content-block">
+                            <h2>Styles Import</h2>
+                            <p>Include the CSS styles in your angular.json or styles.css:</p>
+                            
+                            <div class="code-tabs">
+                                <button class="code-tab active" onclick="showStyleExample('angular-json')">angular.json</button>
+                                <button class="code-tab" onclick="showStyleExample('styles-css')">styles.css</button>
+                            </div>
+
+                            <div class="code-examples">
+                                <div id="angular-json-example" class="code-example active">
+                                    <div class="code-header">
+                                        <span>angular.json</span>
+                                        <button class="copy-btn" onclick="copyCodeBlock('angular-json-styles')">
+                                            <i class="fas fa-copy"></i>
+                                        </button>
+                                    </div>
+                                    <pre><code id="angular-json-styles" class="language-json">"styles": [
+  "src/styles.css",
+  "node_modules/@uttam002/angular-ui-pro/themes/default.css"
+]</code></pre>
+                                </div>
+
+                                <div id="styles-css-example" class="code-example">
+                                    <div class="code-header">
+                                        <span>styles.css</span>
+                                        <button class="copy-btn" onclick="copyCodeBlock('styles-import')">
+                                            <i class="fas fa-copy"></i>
+                                        </button>
+                                    </div>
+                                    <pre><code id="styles-import" class="language-css">@import '~@uttam002/angular-ui-pro/themes/default.css';</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="content-block">
+                            <h2>Verify Installation</h2>
+                            <p>Test your installation with a simple button component:</p>
+                            
+                            <div class="code-block">
+                                <div class="code-header">
+                                    <span>app.component.html</span>
+                                    <button class="copy-btn" onclick="copyCodeBlock('verify-install')">
+                                        <i class="fas fa-copy"></i>
+                                    </button>
+                                </div>
+                                <pre><code id="verify-install" class="language-html">&lt;div class="app-container"&gt;
+  &lt;h1&gt;Welcome to AngularUI Pro!&lt;/h1&gt;
+  
+  &lt;ui-button 
+    variant="primary" 
+    (click)="onButtonClick()"&gt;
+    Click Me!
+  &lt;/ui-button&gt;
+&lt;/div&gt;</code></pre>
+                            </div>
+                        </div>
+
+                        <div class="alert info">
+                            <i class="fas fa-info-circle"></i>
+                            <div>
+                                <strong>Pro Tip:</strong>
+                                Use tree-shaking by importing only the modules you need. Check our 
+                                <a href="#configuration">Configuration Guide</a> for more details.
+                            </div>
+                        </div>
+
+                        <div class="next-steps">
+                            <h3>What's Next?</h3>
+                            <div class="next-step-cards">
+                                <a href="#quick-start" class="next-step-card">
+                                    <i class="fas fa-play"></i>
+                                    <div>
+                                        <h4>Quick Start</h4>
+                                        <p>Build your first component</p>
+                                    </div>
+                                    <i class="fas fa-arrow-right"></i>
+                                </a>
+                                <a href="#theming" class="next-step-card">
+                                    <i class="fas fa-palette"></i>
+                                    <div>
+                                        <h4>Theming</h4>
+                                        <p>Customize the look and feel</p>
+                                    </div>
+                                    <i class="fas fa-arrow-right"></i>
+                                </a>
+                                <a href="components.html" class="next-step-card">
+                                    <i class="fas fa-puzzle-piece"></i>
+                                    <div>
+                                        <h4>Components</h4>
+                                        <p>Explore all available components</p>
+                                    </div>
+                                    <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Quick Start Section -->
+                <section id="quick-start" class="doc-section">
+                    <div class="section-header">
+                        <h1>Quick Start</h1>
+                        <div class="section-meta">
+                            <span class="last-updated">Last updated: August 22, 2025</span>
+                            <span class="reading-time">5 min read</span>
+                        </div>
+                    </div>
+
+                    <div class="section-content">
+                        <p class="lead">
+                            Learn how to build your first application using AngularUI Pro components with this step-by-step guide.
+                        </p>
+
+                        <div class="content-block">
+                            <h2>Creating Your First Component</h2>
+                            <p>Let's create a simple login form using AngularUI Pro components:</p>
+
+                            <div class="code-block">
+                                <div class="code-header">
+                                    <span>login.component.html</span>
+                                    <button class="copy-btn" onclick="copyCodeBlock('login-template')">
+                                        <i class="fas fa-copy"></i>
+                                    </button>
+                                </div>
+                                <pre><code id="login-template" class="language-html">&lt;div class="login-container"&gt;
+  &lt;ui-card class="login-card"&gt;
+    &lt;ui-card-header&gt;
+      &lt;h2&gt;Welcome Back&lt;/h2&gt;
+      &lt;p&gt;Sign in to your account&lt;/p&gt;
+    &lt;/ui-card-header&gt;
+    
+    &lt;ui-card-content&gt;
+      &lt;form [formGroup]="loginForm" (ngSubmit)="onSubmit()"&gt;
+        &lt;ui-form-field&gt;
+          &lt;ui-label&gt;Email&lt;/ui-label&gt;
+          &lt;ui-input 
+            type="email" 
+            formControlName="email"
+            placeholder="Enter your email"
+            [invalid]="emailInvalid"&gt;
+          &lt;/ui-input&gt;
+          &lt;ui-error *ngIf="emailInvalid"&gt;
+            Please enter a valid email
+          &lt;/ui-error&gt;
+        &lt;/ui-form-field&gt;
+
+        &lt;ui-form-field&gt;
+          &lt;ui-label&gt;Password&lt;/ui-label&gt;
+          &lt;ui-input 
+            type="password" 
+            formControlName="password"
+            placeholder="Enter your password"
+            [invalid]="passwordInvalid"&gt;
+          &lt;/ui-input&gt;
+          &lt;ui-error *ngIf="passwordInvalid"&gt;
+            Password is required
+          &lt;/ui-error&gt;
+        &lt;/ui-form-field&gt;
+
+        &lt;ui-button 
+          type="submit" 
+          variant="primary" 
+          size="large"
+          [loading]="isLoading"
+          [disabled]="loginForm.invalid"
+          class="submit-btn"&gt;
+          Sign In
+        &lt;/ui-button&gt;
+      &lt;/form&gt;
+    &lt;/ui-card-content&gt;
+  &lt;/ui-card&gt;
+&lt;/div&gt;</code></pre>
+                            </div>
+                        </div>
+
+                        <div class="content-block">
+                            <h2>Component Logic</h2>
+                            <p>Implement the component logic with form validation:</p>
+
+                            <div class="code-block">
+                                <div class="code-header">
+                                    <span>login.component.ts</span>
+                                    <button class="copy-btn" onclick="copyCodeBlock('login-component')">
+                                        <i class="fas fa-copy"></i>
+                                    </button>
+                                </div>
+                                <pre><code id="login-component" class="language-typescript">import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+@Component({
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
+})
+export class LoginComponent implements OnInit {
+  loginForm: FormGroup;
+  isLoading = false;
+
+  constructor(private fb: FormBuilder) {}
+
+  ngOnInit() {
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]]
+    });
+  }
+
+  get emailInvalid() {
+    const control = this.loginForm.get('email');
+    return control?.invalid && control?.touched;
+  }
+
+  get passwordInvalid() {
+    const control = this.loginForm.get('password');
+    return control?.invalid && control?.touched;
+  }
+
+  async onSubmit() {
+    if (this.loginForm.valid) {
+      this.isLoading = true;
+      
+      try {
+        // Simulate API call
+        await this.delay(2000);
+        console.log('Login successful!', this.loginForm.value);
+      } catch (error) {
+        console.error('Login failed:', error);
+      } finally {
+        this.isLoading = false;
+      }
+    }
+  }
+
+  private delay(ms: number): Promise&lt;void&gt; {
+    return new Promise(resolve =&gt; setTimeout(resolve, ms));
+  }
+}</code></pre>
+                            </div>
+                        </div>
+
+                        <div class="demo-preview">
+                            <h3>Live Preview</h3>
+                            <iframe src="examples/login-demo.html" class="demo-iframe"></iframe>
+                            <div class="demo-actions">
+                                <button class="demo-btn" onclick="openInNewTab('examples/login-demo.html')">
+                                    <i class="fas fa-external-link-alt"></i>
+                                    Open in New Tab
+                                </button>
+                                <button class="demo-btn" onclick="copyDemoCode()">
+                                    <i class="fas fa-code"></i>
+                                    View Source
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Configuration Section -->
+                <section id="configuration" class="doc-section">
+                    <div class="section-header">
+                        <h1>Configuration</h1>
+                        <div class="section-meta">
+                            <span class="last-updated">Last updated: August 22, 2025</span>
+                            <span class="reading-time">4 min read</span>
+                        </div>
+                    </div>
+
+                    <div class="section-content">
+                        <p class="lead">
+                            Configure AngularUI Pro to match your application's requirements with custom settings and optimizations.
+                        </p>
+
+                        <div class="content-block">
+                            <h2>Global Configuration</h2>
+                            <p>Set up global configuration using the forRoot method:</p>
+
+                            <div class="code-block">
+                                <div class="code-header">
+                                    <span>app.module.ts</span>
+                                    <button class="copy-btn" onclick="copyCodeBlock('global-config')">
+                                        <i class="fas fa-copy"></i>
+                                    </button>
+                                </div>
+                                <pre><code id="global-config" class="language-typescript">import { AngularUiProModule, UI_PRO_CONFIG } from '@uttam002/angular-ui-pro';
+
+@NgModule({
+  imports: [
+    AngularUiProModule.forRoot({
+      theme: 'material-dark',
+      rippleDisabled: false,
+      animationDuration: 300,
+      breakpoints: {
+        mobile: 768,
+        tablet: 1024,
+        desktop: 1200
+      }
+    })
+  ]
+})
+export class AppModule { }</code></pre>
+                            </div>
+                        </div>
+
+                        <div class="config-table">
+                            <h3>Configuration Options</h3>
+                            <div class="table-container">
+                                <table class="docs-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Property</th>
+                                            <th>Type</th>
+                                            <th>Default</th>
+                                            <th>Description</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><code>theme</code></td>
+                                            <td>string</td>
+                                            <td>'material'</td>
+                                            <td>Default theme name</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>rippleDisabled</code></td>
+                                            <td>boolean</td>
+                                            <td>false</td>
+                                            <td>Globally disable ripple effects</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>animationDuration</code></td>
+                                            <td>number</td>
+                                            <td>250</td>
+                                            <td>Default animation duration (ms)</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>breakpoints</code></td>
+                                            <td>object</td>
+                                            <td>See example</td>
+                                            <td>Responsive breakpoints</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Footer Navigation -->
+            <div class="docs-footer">
+                <div class="footer-nav">
+                    <a href="#quick-start" class="footer-nav-btn prev">
+                        <i class="fas fa-arrow-left"></i>
+                        <div>
+                            <span>Previous</span>
+                            <strong>Quick Start</strong>
+                        </div>
+                    </a>
+                    <a href="#configuration" class="footer-nav-btn next">
+                        <div>
+                            <span>Next</span>
+                            <strong>Configuration</strong>
+                        </div>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                
+                <div class="footer-feedback">
+                    <h4>Was this page helpful?</h4>
+                    <div class="feedback-buttons">
+                        <button class="feedback-btn" onclick="submitFeedback('helpful')">
+                            <i class="fas fa-thumbs-up"></i>
+                            Yes
+                        </button>
+                        <button class="feedback-btn" onclick="submitFeedback('not-helpful')">
+                            <i class="fas fa-thumbs-down"></i>
+                            No
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Table of Contents -->
+        <aside class="toc-sidebar">
+            <div class="toc-header">
+                <h4>On This Page</h4>
+            </div>
+            <nav class="toc-nav" id="tocNav">
+                <!-- Dynamically generated -->
+            </nav>
+            
+            <div class="page-info">
+                <div class="info-item">
+                    <i class="fas fa-calendar"></i>
+                    <span>Last updated: Aug 22, 2025</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-user"></i>
+                    <span>By uttam002</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-github"></i>
+                    <a href="https://github.com/uttam002/angular-ui-pro/edit/main/docs/installation.md" target="_blank">
+                        Edit this page
+                    </a>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Search Modal -->
+    <div id="searchModal" class="search-modal">
+        <div class="search-modal-content">
+            <div class="search-input-container">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search documentation..." id="modalSearchInput">
+                <kbd>ESC</kbd>
+            </div>
+            <div class="search-results" id="searchResults">
+                <!-- Search results will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="documentation.js"></script>
+</body>
+</html>

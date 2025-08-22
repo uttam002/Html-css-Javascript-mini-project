@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Components - AngularUI Pro</title>
+    <link rel="stylesheet" href="components.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="index.html" class="brand-link">
+                    <i class="fas fa-cube brand-icon"></i>
+                    <span>AngularUI Pro</span>
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="#" class="nav-link active">Components</a>
+                <a href="documentation.html" class="nav-link">Documentation</a>
+                <a href="#" class="nav-link">Examples</a>
+                <button class="btn-primary" onclick="window.open('https://stackblitz.com/', '_blank')">
+                    <i class="fas fa-external-link-alt"></i>
+                    Try Live
+                </button>
+            </div>
+            <div class="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h3>Components</h3>
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" placeholder="Search components..." id="searchInput" onkeyup="searchComponents()">
+                </div>
+            </div>
+            
+            <div class="sidebar-content">
+                <div class="component-category">
+                    <div class="category-header" onclick="toggleCategory('buttons')">
+                        <i class="fas fa-mouse-pointer"></i>
+                        <span>Buttons & Actions</span>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="category-items" id="buttons">
+                        <a href="#ripple-button" class="sidebar-item">Ripple Button</a>
+                        <a href="#floating-action" class="sidebar-item">Floating Action Button</a>
+                        <a href="#toggle-button" class="sidebar-item">Toggle Button</a>
+                        <a href="#button-group" class="sidebar-item">Button Group</a>
+                    </div>
+                </div>
+
+                <div class="component-category">
+                    <div class="category-header" onclick="toggleCategory('forms')">
+                        <i class="fas fa-edit"></i>
+                        <span>Form Controls</span>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="category-items" id="forms">
+                        <a href="#text-input" class="sidebar-item">Text Input</a>
+                        <a href="#select-dropdown" class="sidebar-item">Select Dropdown</a>
+                        <a href="#checkbox" class="sidebar-item">Checkbox</a>
+                        <a href="#radio-button" class="sidebar-item">Radio Button</a>
+                        <a href="#slider" class="sidebar-item">Slider</a>
+                        <a href="#date-picker" class="sidebar-item">Date Picker</a>
+                    </div>
+                </div>
+
+                <div class="component-category">
+                    <div class="category-header" onclick="toggleCategory('feedback')">
+                        <i class="fas fa-info-circle"></i>
+                        <span>Feedback</span>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="category-items" id="feedback">
+                        <a href="#progress-bar" class="sidebar-item">Progress Bar</a>
+                        <a href="#loading-spinner" class="sidebar-item">Loading Spinner</a>
+                        <a href="#toast" class="sidebar-item">Toast Notification</a>
+                        <a href="#alert" class="sidebar-item">Alert</a>
+                        <a href="#modal" class="sidebar-item">Modal</a>
+                    </div>
+                </div>
+
+                <div class="component-category">
+                    <div class="category-header" onclick="toggleCategory('navigation')">
+                        <i class="fas fa-compass"></i>
+                        <span>Navigation</span>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="category-items" id="navigation">
+                        <a href="#tabs" class="sidebar-item">Tabs</a>
+                        <a href="#breadcrumb" class="sidebar-item">Breadcrumb</a>
+                        <a href="#pagination" class="sidebar-item">Pagination</a>
+                        <a href="#stepper" class="sidebar-item">Stepper</a>
+                    </div>
+                </div>
+
+                <div class="component-category">
+                    <div class="category-header" onclick="toggleCategory('layout')">
+                        <i class="fas fa-th-large"></i>
+                        <span>Layout</span>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="category-items" id="layout">
+                        <a href="#card" class="sidebar-item">Card</a>
+                        <a href="#grid" class="sidebar-item">Grid System</a>
+                        <a href="#divider" class="sidebar-item">Divider</a>
+                        <a href="#accordion" class="sidebar-item">Accordion</a>
+                    </div>
+                </div>
+
+                <div class="component-category">
+                    <div class="category-header" onclick="toggleCategory('data')">
+                        <i class="fas fa-table"></i>
+                        <span>Data Display</span>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="category-items" id="data">
+                        <a href="#data-table" class="sidebar-item">Data Table</a>
+                        <a href="#chip" class="sidebar-item">Chip</a>
+                        <a href="#badge" class="sidebar-item">Badge</a>
+                        <a href="#tooltip" class="sidebar-item">Tooltip</a>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="content-header">
+                <div class="breadcrumb">
+                    <a href="index.html">Home</a>
+                    <i class="fas fa-chevron-right"></i>
+                    <span>Components</span>
+                </div>
+                <div class="content-actions">
+                    <button class="action-btn" onclick="toggleViewMode()">
+                        <i class="fas fa-th-large" id="viewModeIcon"></i>
+                        <span id="viewModeText">Grid View</span>
+                    </button>
+                    <button class="action-btn" onclick="showInstallGuide()">
+                        <i class="fas fa-download"></i>
+                        Installation
+                    </button>
+                </div>
+            </div>
+
+            <!-- Component Sections -->
+            <div class="components-container">
+                <!-- Ripple Button Component -->
+                <section id="ripple-button" class="component-section">
+                    <div class="component-header">
+                        <div class="component-title">
+                            <h2>Ripple Button</h2>
+                            <div class="component-badges">
+                                <span class="badge new">New</span>
+                                <span class="badge interactive">Interactive</span>
+                            </div>
+                        </div>
+                        <p class="component-description">
+                            Interactive buttons with material design ripple effects. Supports multiple variants, sizes, and custom themes.
+                        </p>
+                    </div>
+
+                    <div class="component-showcase">
+                        <div class="showcase-tabs">
+                            <button class="tab-btn active" onclick="showTab('ripple-button', 'demo')">Demo</button>
+                            <button class="tab-btn" onclick="showTab('ripple-button', 'code')">Code</button>
+                            <button class="tab-btn" onclick="showTab('ripple-button', 'api')">API</button>
+                        </div>
+
+                        <div class="tab-content">
+                            <div id="ripple-button-demo" class="tab-pane active">
+                                <div class="demo-container">
+                                    <div class="demo-section">
+                                        <h4>Variants</h4>
+                                        <div class="demo-group">
+                                            <button class="ui-button primary" onclick="demoRipple(event, this)">
+                                                Primary
+                                            </button>
+                                            <button class="ui-button secondary" onclick="demoRipple(event, this)">
+                                                Secondary
+                                            </button>
+                                            <button class="ui-button success" onclick="demoRipple(event, this)">
+                                                Success
+                                            </button>
+                                            <button class="ui-button warning" onclick="demoRipple(event, this)">
+                                                Warning
+                                            </button>
+                                            <button class="ui-button danger" onclick="demoRipple(event, this)">
+                                                Danger
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div class="demo-section">
+                                        <h4>Sizes</h4>
+                                        <div class="demo-group">
+                                            <button class="ui-button primary small" onclick="demoRipple(event, this)">
+                                                Small
+                                            </button>
+                                            <button class="ui-button primary medium" onclick="demoRipple(event, this)">
+                                                Medium
+                                            </button>
+                                            <button class="ui-button primary large" onclick="demoRipple(event, this)">
+                                                Large
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div class="demo-section">
+                                        <h4>With Icons</h4>
+                                        <div class="demo-group">
+                                            <button class="ui-button primary" onclick="demoRipple(event, this)">
+                                                <i class="fas fa-heart"></i>
+                                                Like
+                                            </button>
+                                            <button class="ui-button secondary" onclick="demoRipple(event, this)">
+                                                <i class="fas fa-share"></i>
+                                                Share
+                                            </button>
+                                            <button class="ui-button success" onclick="demoRipple(event, this)">
+                                                <i class="fas fa-download"></i>
+                                                Download
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div class="demo-section">
+                                        <h4>States</h4>
+                                        <div class="demo-group">
+                                            <button class="ui-button primary" onclick="demoRipple(event, this)">
+                                                Normal
+                                            </button>
+                                            <button class="ui-button primary loading" disabled>
+                                                <i class="fas fa-spinner fa-spin"></i>
+                                                Loading
+                                            </button>
+                                            <button class="ui-button primary" disabled>
+                                                Disabled
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="ripple-button-code" class="tab-pane">
+                                <div class="code-container">
+                                    <div class="code-tabs">
+                                        <button class="code-tab active" onclick="showCodeTab('ripple-button', 'html')">HTML</button>
+                                        <button class="code-tab" onclick="showCodeTab('ripple-button', 'ts')">TypeScript</button>
+                                        <button class="code-tab" onclick="showCodeTab('ripple-button', 'scss')">SCSS</button>
+                                    </div>
+                                    
+                                    <div class="code-content">
+                                        <div id="ripple-button-html" class="code-block active">
+                                            <div class="code-header">
+                                                <span>component.html</span>
+                                                <button class="copy-btn" onclick="copyCode('ripple-button-html-code')">
+                                                    <i class="fas fa-copy"></i>
+                                                </button>
+                                            </div>
+                                            <pre><code id="ripple-button-html-code" class="language-html">&lt;!-- Basic Usage --&gt;
+&lt;ui-button variant="primary" (click)="handleClick()"&gt;
+  Click Me
+&lt;/ui-button&gt;
+
+&lt;!-- With Icon --&gt;
+&lt;ui-button variant="primary" icon="heart"&gt;
+  Like
+&lt;/ui-button&gt;
+
+&lt;!-- Different Sizes --&gt;
+&lt;ui-button variant="primary" size="small"&gt;Small&lt;/ui-button&gt;
+&lt;ui-button variant="primary" size="medium"&gt;Medium&lt;/ui-button&gt;
+&lt;ui-button variant="primary" size="large"&gt;Large&lt;/ui-button&gt;
+
+&lt;!-- Loading State --&gt;
+&lt;ui-button 
+  variant="primary" 
+  [loading]="isLoading"
+  (click)="submitForm()"&gt;
+  Submit
+&lt;/ui-button&gt;</code></pre>
+                                        </div>
+                                        
+                                        <div id="ripple-button-ts" class="code-block">
+                                            <div class="code-header">
+                                                <span>component.ts</span>
+                                                <button class="copy-btn" onclick="copyCode('ripple-button-ts-code')">
+                                                    <i class="fas fa-copy"></i>
+                                                </button>
+                                            </div>
+                                            <pre><code id="ripple-button-ts-code" class="language-typescript">import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-example',
+  templateUrl: './example.component.html'
+})
+export class ExampleComponent {
+  isLoading = false;
+
+  handleClick() {
+    console.log('Button clicked!');
+  }
+
+  submitForm() {
+    this.isLoading = true;
+    
+    // Simulate API call
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 2000);
+  }
+}</code></pre>
+                                        </div>
+                                        
+                                        <div id="ripple-button-scss" class="code-block">
+                                            <div class="code-header">
+                                                <span>component.scss</span>
+                                                <button class="copy-btn" onclick="copyCode('ripple-button-scss-code')">
+                                                    <i class="fas fa-copy"></i>
+                                                </button>
+                                            </div>
+                                            <pre><code id="ripple-button-scss-code" class="language-scss">// Custom button styling
+ui-button {
+  margin: 0.5rem;
+  
+  &.custom-theme {
+    --button-primary-bg: linear-gradient(135deg, #667eea, #764ba2);
+    --button-primary-hover: linear-gradient(135deg, #5a67d8, #553c9a);
+  }
+}</code></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="ripple-button-api" class="tab-pane">
+                                <div class="api-container">
+                                    <div class="api-section">
+                                        <h4>Properties</h4>
+                                        <div class="api-table">
+                                            <div class="api-row header">
+                                                <div class="api-cell">Property</div>
+                                                <div class="api-cell">Type</div>
+                                                <div class="api-cell">Default</div>
+                                                <div class="api-cell">Description</div>
+                                            </div>
+                                            <div class="api-row">
+                                                <div class="api-cell"><code>variant</code></div>
+                                                <div class="api-cell">string</div>
+                                                <div class="api-cell">'primary'</div>
+                                                <div class="api-cell">Button style variant</div>
+                                            </div>
+                                            <div class="api-row">
+                                                <div class="api-cell"><code>size</code></div>
+                                                <div class="api-cell">string</div>
+                                                <div class="api-cell">'medium'</div>
+                                                <div class="api-cell">Button size</div>
+                                            </div>
+                                            <div class="api-row">
+                                                <div class="api-cell"><code>loading</code></div>
+                                                <div class="api-cell">boolean</div>
+                                                <div class="api-cell">false</div>
+                                                <div class="api-cell">Show loading spinner</div>
+                                            </div>
+                                            <div class="api-row">
+                                                <div class="api-cell"><code>disabled</code></div>
+                                                <div class="api-cell">boolean</div>
+                                                <div class="api-cell">false</div>
+                                                <div class="api-cell">Disable button</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="api-section">
+                                        <h4>Events</h4>
+                                        <div class="api-table">
+                                            <div class="api-row header">
+                                                <div class="api-cell">Event</div>
+                                                <div class="api-cell">Type</div>
+                                                <div class="api-cell">Description</div>
+                                            </div>
+                                            <div class="api-row">
+                                                <div class="api-cell"><code>click</code></div>
+                                                <div class="api-cell">EventEmitter&lt;MouseEvent&gt;</div>
+                                                <div class="api-cell">Emitted when button is clicked</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Progress Bar Component -->
+                <section id="progress-bar" class="component-section">
+                    <div class="component-header">
+                        <div class="component-title">
+                            <h2>Progress Bar</h2>
+                            <div class="component-badges">
+                                <span class="badge animated">Animated</span>
+                            </div>
+                        </div>
+                        <p class="component-description">
+                            Versatile progress indicators supporting linear and circular variants with smooth animations and customizable themes.
+                        </p>
+                    </div>
+
+                    <div class="component-showcase">
+                        <div class="showcase-tabs">
+                            <button class="tab-btn active" onclick="showTab('progress-bar', 'demo')">Demo</button>
+                            <button class="tab-btn" onclick="showTab('progress-bar', 'code')">Code</button>
+                            <button class="tab-btn" onclick="showTab('progress-bar', 'api')">API</button>
+                        </div>
+
+                        <div class="tab-content">
+                            <div id="progress-bar-demo" class="tab-pane active">
+                                <div class="demo-container">
+                                    <div class="demo-section">
+                                        <h4>Linear Progress</h4>
+                                        <div class="demo-group vertical">
+                                            <div class="progress-demo-item">
+                                                <label>Determinate (70%)</label>
+                                                <div class="ui-progress-linear" data-value="70">
+                                                    <div class="progress-fill"></div>
+                                                </div>
+                                            </div>
+                                            <div class="progress-demo-item">
+                                                <label>Indeterminate</label>
+                                                <div class="ui-progress-linear indeterminate">
+                                                    <div class="progress-fill"></div>
+                                                </div>
+                                            </div>
+                                            <div class="progress-demo-item">
+                                                <label>Buffer (60% / 80%)</label>
+                                                <div class="ui-progress-linear buffer">
+                                                    <div class="progress-buffer" style="width: 80%"></div>
+                                                    <div class="progress-fill" style="width: 60%"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="demo-section">
+                                        <h4>Circular Progress</h4>
+                                        <div class="demo-group">
+                                            <div class="progress-demo-item">
+                                                <label>75%</label>
+                                                <div class="ui-progress-circular">
+                                                    <svg viewBox="0 0 36 36">
+                                                        <path class="progress-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                                                        <path class="progress-value" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" stroke-dasharray="75, 100"/>
+                                                    </svg>
+                                                    <span class="progress-text">75%</span>
+                                                </div>
+                                            </div>
+                                            <div class="progress-demo-item">
+                                                <label>Spinning</label>
+                                                <div class="ui-progress-circular spinning">
+                                                    <svg viewBox="0 0 36 36">
+                                                        <path class="progress-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                                                        <path class="progress-value" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" stroke-dasharray="25, 100"/>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="demo-section">
+                                        <h4>Interactive Demo</h4>
+                                        <div class="interactive-demo">
+                                            <div class="demo-controls">
+                                                <label>Progress Value: <span id="progressValue">50</span>%</label>
+                                                <input type="range" min="0" max="100" value="50" id="progressSlider" oninput="updateProgress(this.value)">
+                                            </div>
+                                            <div class="demo-group">
+                                                <div class="ui-progress-linear" id="demoProgressLinear">
+                                                    <div class="progress-fill"></div>
+                                                </div>
+                                                <div class="ui-progress-circular" id="demoProgressCircular">
+                                                    <svg viewBox="0 0 36 36">
+                                                        <path class="progress-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                                                        <path class="progress-value" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                                                    </svg>
+                                                    <span class="progress-text">50%</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="progress-bar-code" class="tab-pane">
+                                <div class="code-container">
+                                    <div class="code-tabs">
+                                        <button class="code-tab active" onclick="showCodeTab('progress-bar', 'html')">HTML</button>
+                                        <button class="code-tab" onclick="showCodeTab('progress-bar', 'ts')">TypeScript</button>
+                                    </div>
+                                    
+                                    <div class="code-content">
+                                        <div id="progress-bar-html" class="code-block active">
+                                            <div class="code-header">
+                                                <span>component.html</span>
+                                                <button class="copy-btn" onclick="copyCode('progress-bar-html-code')">
+                                                    <i class="fas fa-copy"></i>
+                                                </button>
+                                            </div>
+                                            <pre><code id="progress-bar-html-code" class="language-html">&lt;!-- Linear Progress --&gt;
+&lt;ui-progress-bar 
+  [value]="progressValue" 
+  variant="linear"&gt;
+&lt;/ui-progress-bar&gt;
+
+&lt;!-- Circular Progress --&gt;
+&lt;ui-progress-bar 
+  [value]="progressValue" 
+  variant="circular"
+  [showText]="true"&gt;
+&lt;/ui-progress-bar&gt;
+
+&lt;!-- Indeterminate --&gt;
+&lt;ui-progress-bar 
+  variant="linear"
+  mode="indeterminate"&gt;
+&lt;/ui-progress-bar&gt;</code></pre>
+                                        </div>
+                                        
+                                        <div id="progress-bar-ts" class="code-block">
+                                            <div class="code-header">
+                                                <span>component.ts</span>
+                                                <button class="copy-btn" onclick="copyCode('progress-bar-ts-code')">
+                                                    <i class="fas fa-copy"></i>
+                                                </button>
+                                            </div>
+                                            <pre><code id="progress-bar-ts-code" class="language-typescript">import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-progress-demo',
+  templateUrl: './progress-demo.component.html'
+})
+export class ProgressDemoComponent {
+  progressValue = 0;
+
+  ngOnInit() {
+    this.simulateProgress();
+  }
+
+  simulateProgress() {
+    const interval = setInterval(() => {
+      this.progressValue += 10;
+      
+      if (this.progressValue >= 100) {
+        clearInterval(interval);
+      }
+    }, 500);
+  }
+}</code></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="progress-bar-api" class="tab-pane">
+                                <div class="api-container">
+                                    <div class="api-section">
+                                        <h4>Properties</h4>
+                                        <div class="api-table">
+                                            <div class="api-row header">
+                                                <div class="api-cell">Property</div>
+                                                <div class="api-cell">Type</div>
+                                                <div class="api-cell">Default</div>
+                                                <div class="api-cell">Description</div>
+                                            </div>
+                                            <div class="api-row">
+                                                <div class="api-cell"><code>value</code></div>
+                                                <div class="api-cell">number</div>
+                                                <div class="api-cell">0</div>
+                                                <div class="api-cell">Progress value (0-100)</div>
+                                            </div>
+                                            <div class="api-row">
+                                                <div class="api-cell"><code>variant</code></div>
+                                                <div class="api-cell">string</div>
+                                                <div class="api-cell">'linear'</div>
+                                                <div class="api-cell">Progress bar style</div>
+                                            </div>
+                                            <div class="api-row">
+                                                <div class="api-cell"><code>mode</code></div>
+                                                <div class="api-cell">string</div>
+                                                <div class="api-cell">'determinate'</div>
+                                                <div class="api-cell">Progress mode</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- More components would continue here... -->
+                
+            </div>
+        </main>
+    </div>
+
+    <!-- Installation Modal -->
+    <div id="installModal" class="modal">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h3>Installation Guide</h3>
+                <button class="close-btn" onclick="closeModal('installModal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="install-steps">
+                    <div class="install-step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Install Package</h4>
+                            <div class="code-snippet">
+                                <code>npm install @uttam002/angular-ui-pro</code>
+                                <button class="copy-code-btn" onclick="copyToClipboard('npm install @uttam002/angular-ui-pro')">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="install-step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Import Module</h4>
+                            <div class="code-snippet">
+                                <code>import { AngularUiProModule } from '@uttam002/angular-ui-pro';</code>
+                                <button class="copy-code-btn" onclick="copyToClipboard('import { AngularUiProModule } from \'@uttam002/angular-ui-pro\';')">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="install-step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Add to Module</h4>
+                            <div class="code-snippet">
+                                <code>imports: [AngularUiProModule]</code>
+                                <button class="copy-code-btn" onclick="copyToClipboard('imports: [AngularUiProModule]')">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="components.js"></script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Jane Doe | Portfolio</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link rel="stylesheet" href="portfolio.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo">Jane<span>Doe</span></div>
+      <ul id="nav-links">
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#achievements">Achievements</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="dark-toggle" id="darkToggle" title="Toggle dark mode">🌗</button>
+    </nav>
+  </header>
+  <main>
+    <!-- Hero Section -->
+    <section id="hero" class="section hero">
+      <div class="hero-left">
+        <h1>Hi, I'm <span class="accent">Jane Doe</span></h1>
+        <h2 class="typing" id="typing"></h2>
+        <p>Full-stack Developer | Open Source Enthusiast | Mentor</p>
+        <div class="hero-buttons">
+          <a href="#projects" class="btn primary">View My Work</a>
+          <a href="#contact" class="btn secondary">Contact Me</a>
+        </div>
+      </div>
+      <div class="hero-right">
+        <img src="https://randomuser.me/api/portraits/men/72.jpg" alt="Jane Doe" class="avatar">
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="section about scroll-fade">
+      <h2>About Me</h2>
+      <p>
+        Passionate developer with 5+ years in web & cloud technologies. I love building scalable applications and sharing knowledge with the tech community.
+      </p>
+      <ul class="about-info">
+        <li><b>Location:</b> Berlin, Germany</li>
+        <li><b>Email:</b> jane.doe@example.com</li>
+        <li><b>Website:</b> janedoe.dev</li>
+      </ul>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills" class="section skills scroll-fade">
+      <h2>Skills</h2>
+      <div class="skills-list">
+        <!-- Filled by JS -->
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects" class="section projects scroll-fade">
+      <h2>Projects</h2>
+      <div class="projects-grid" id="projectsGrid">
+        <!-- Filled by JS -->
+      </div>
+    </section>
+
+    <!-- Experience -->
+    <section id="experience" class="section experience scroll-fade">
+      <h2>Experience</h2>
+      <div class="timeline" id="expTimeline">
+        <!-- Filled by JS -->
+      </div>
+    </section>
+
+    <!-- Education -->
+    <section id="education" class="section education scroll-fade">
+      <h2>Education</h2>
+      <div class="timeline" id="eduTimeline">
+        <!-- Filled by JS -->
+      </div>
+    </section>
+
+    <!-- Achievements -->
+    <section id="achievements" class="section achievements scroll-fade">
+      <h2>Achievements</h2>
+      <ul id="achList">
+        <!-- Filled by JS -->
+      </ul>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="section contact scroll-fade">
+      <h2>Contact Me</h2>
+      <form id="contactForm" autocomplete="off">
+        <div class="form-row">
+          <input type="text" name="name" placeholder="Your Name" required>
+          <input type="email" name="email" placeholder="Your Email" required>
+        </div>
+        <textarea name="message" placeholder="Your Message" required></textarea>
+        <button class="btn primary" type="submit">Send Message</button>
+        <div class="form-message" id="formMessage"></div>
+      </form>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; <span id="year"></span> Jane Doe. All rights reserved.</p>
+    <div class="socials">
+      <a href="https://github.com/janedoe" target="_blank" title="GitHub">🐱‍💻</a>
+      <a href="https://linkedin.com/in/janedoe" target="_blank" title="LinkedIn">💼</a>
+      <a href="mailto:jane.doe@example.com" title="Email">✉️</a>
+    </div>
+  </footer>
+  <script src="portfolio.js"></script>
+</body>
+</html>

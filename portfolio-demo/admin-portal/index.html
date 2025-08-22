@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Portfolio Admin Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="dashboard-container" id="dashboard">
+  <aside class="sidebar">
+    <div class="logo">Portfolify</div>
+    <nav>
+      <ul>
+        <li class="active">Sections</li>
+        <li>Profile</li>
+        <li onclick="previewPortfolio()">Preview</li>
+      </ul>
+    </nav>
+    <div class="toggle-dark" onclick="toggleDarkMode()"><span>🌗</span> Dark Mode</div>
+  </aside>
+  <main class="main-content">
+    <header>
+      <h1>Manage Portfolio Sections</h1>
+      <button class="primary-btn" onclick="previewPortfolio()">Preview Portfolio</button>
+    </header>
+    <section class="section-list" id="section-list">
+      <!-- Sections rendered here -->
+    </section>
+    <section id="editor" class="editor" style="display:none;">
+      <h2 id="editor-title">Edit Section</h2>
+      <form id="editor-form">
+        <!-- Dynamic fields here -->
+      </form>
+      <button class="secondary-btn" onclick="closeEditor()">Close</button>
+    </section>
+  </main>
+</div>
+
+<!-- Portfolio Preview Modal -->
+<div id="preview-modal" class="modal" style="display:none;">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <iframe id="preview-iframe" srcdoc="" frameborder="0"></iframe>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

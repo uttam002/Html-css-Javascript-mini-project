@@ -22,24 +22,32 @@
                 <div class="flipper">
                     <!-- Front: Login Panel -->
                     <div class="flipCardFace loginSide">
-                        <div class="modernCard row w-100 flex-md-row flex-column overflow-hidden animate__animated animate__fadeInDown">
+                        <div
+                            class="modernCard row w-100 flex-md-row flex-column overflow-hidden animate__animated animate__fadeInDown">
                             <!-- Welcome panel (hidden on front in flip, visible on md+) -->
-                            <div class="col-md-6 welcomePanel d-flex flex-column justify-content-center align-items-start px-5 py-5 position-relative d-none d-md-flex">
+                            <div
+                                class="welcomePanel d-flex flex-column justify-content-center align-items-start px-5 py-5 position-relative d-none d-md-flex">
                                 <h1 class="fw-bold mb-2 animate__animated animate__fadeInLeft welcomeTitleLight">
-                                    Welcome to <span class="brandGradient">CashCanvas</span>
+                                    Reset Your <span class="brandGradient">Password</span>
                                 </h1>
-                                <h6 class="mb-3 text-muted animate__animated animate__fadeInLeft animate__delay-1s domainLight">
-                                    Expense Management System
+                                <h6
+                                    class="mb-3 text-muted animate__animated animate__fadeInLeft animate__delay-1s domainLight">
+                                    No worries! We’ll help you get back to your account.
                                 </h6>
-                                <p class="mb-0 text-muted animate__animated animate__fadeInLeft animate__delay-1s fs-6">
-                                    Effortlessly manage your finances, track expenses, and achieve your financial goals with our intuitive and secure platform.
-                                </p>
+                                <ul
+                                    class="mb-3 ps-4 text-muted animate__animated animate__fadeInLeft animate__delay-1s fs-6">
+                                    <li>Check your inbox and spam folder for the reset link.</li>
+                                    <li>Contact our <a href="mailto:support@cashcanvas.com">Support Team</a>. if you
+                                        don’t get the email soon.</li>
+                                    <li>Your account security is important to us.</li>
+                                </ul>
                                 <div class="welcomeShapesLight">
                                     <div class="extra"></div>
                                 </div>
                             </div>
                             <!-- Login panel always visible on front -->
-                            <div class="col-md-6 loginPanel d-flex flex-column justify-content-center align-items-center px-4 py-5 position-relative">
+                            <div
+                                class="col-md-6 loginPanel d-flex flex-column justify-content-center align-items-center px-4 py-5 position-relative">
                                 <div class="flipCorner topLeft d-md-none" data-flip="flip"></div>
                                 <div class="flipCorner topRight d-md-none" data-flip="flip"></div>
                                 <div class="flipCorner bottomLeft d-md-none" data-flip="flip"></div>
@@ -47,29 +55,42 @@
                                 <div class="loginPanelBgLogo"></div>
                                 <div class="w-100" style="max-width: 350px;">
                                     <div class="d-flex align-items-center justify-content-center mb-4 gap-2">
-                                        <img src="Logo_for_Cash_Canvas.png" alt="CashCanvas Logo" class="img-fluid logoImg ms-2" style="max-width: 44px; height: 44px; border-radius: 50%; box-shadow: 0 2px 8px #8e71fb22; background: #eaeaea;" />
-                                        <h6 class="text-center textLogin animate__animated animate__fadeInDown fs-6 mb-0">USER LOGIN</h6>
+                                        <img src="Logo_for_Cash_Canvas.png" alt="CashCanvas Logo"
+                                            class="img-fluid logoImg ms-2"
+                                            style="max-width: 44px; height: 44px; border-radius: 50%; box-shadow: 0 2px 8px #8e71fb22; background: #eaeaea;" />
+                                        <h6
+                                            class="text-center textLogin animate__animated animate__fadeInDown fs-6 mb-0">
+                                            USER LOGIN</h6>
                                     </div>
-                                    <form id="loginForm" novalidate class="animate__animated animate__fadeInUp animate__delay-1s">
-                                        <div class="mb-3 input-group animate__animated animate__fadeIn animate__delay-2s">
-                                            <span class="input-group-text inputGroupTextIconInput"><i class="bi bi-person"></i></span>
+                                    <form id="loginForm" novalidate
+                                        class="animate__animated animate__fadeInUp animate__delay-1s">
+                                        <div
+                                            class="mb-3 input-group animate__animated animate__fadeIn animate__delay-2s">
+                                            <span class="input-group-text inputGroupTextIconInput"><i
+                                                    class="bi bi-person"></i></span>
                                             <input type="email" class="form-control form-control-lg inputBg" id="email"
                                                 placeholder="Email address" required />
-                                            <div class="invalid-feedback w-100 text-start">Please enter a valid email address.</div>
+                                            <div class="invalid-feedback w-100 text-start">Please enter a valid email
+                                                address.</div>
                                         </div>
-                                        <div class="mb-3 input-group passwordInputGroup animate__animated animate__fadeIn animate__delay-2s">
-                                            <span class="input-group-text inputGroupTextIconInput"><i class="bi bi-lock"></i></span>
-                                            <input type="password" class="form-control form-control-lg inputBg z-1" id="password"
-                                                placeholder="Password" required />
+                                        <div
+                                            class="mb-3 input-group passwordInputGroup animate__animated animate__fadeIn animate__delay-2s">
+                                            <span class="input-group-text inputGroupTextIconInput"><i
+                                                    class="bi bi-lock"></i></span>
+                                            <input type="password" class="form-control form-control-lg inputBg z-1"
+                                                id="password" placeholder="Password" required />
                                             <button type="button" tabindex="-1" class="btn eyeBtn" id="togglePassword"
                                                 aria-label="Show password">
                                                 <i class="bi bi-eye"></i>
                                             </button>
-                                            <div class="invalid-feedback w-100 text-start">Please enter your password.</div>
+                                            <div class="invalid-feedback w-100 text-start">Please enter your password.
+                                            </div>
                                         </div>
-                                        <div class="d-flex justify-content-between align-items-center mb-3 animate__animated animate__fadeIn animate__delay-2s">
+                                        <div
+                                            class="d-flex justify-content-between align-items-center mb-3 animate__animated animate__fadeIn animate__delay-2s">
                                             <div class="remembermeToggle">
-                                                <input class="remembermeCheckbox" type="checkbox" id="rememberMe" hidden>
+                                                <input class="remembermeCheckbox" type="checkbox" id="rememberMe"
+                                                    hidden>
                                                 <label class="remembermeSwitch" for="rememberMe">
                                                     <span class="slider"></span>
                                                 </label>
@@ -93,9 +114,11 @@
                     </div>
                     <!-- Back: Welcome Panel, only visible on flip for xs/sm -->
                     <div class="flipCardFace welcomeSide d-md-none">
-                        <div class="modernCard flex-column flex-md-row overflow-hidden animate__animated animate__fadeInDown">
+                        <div
+                            class="modernCard flex-column flex-md-row overflow-hidden animate__animated animate__fadeInDown">
                             <!-- Welcome panel (only visible on flip) -->
-                            <div class="welcomePanel d-flex flex-column justify-content-center align-items-center px-5 py-5 position-relative w-100">
+                            <div
+                                class="welcomePanel d-flex flex-column justify-content-center align-items-center px-5 py-5 position-relative w-100">
                                 <div class="flipCorner topLeft d-md-none" data-flip="flip"></div>
                                 <div class="flipCorner topRight d-md-none" data-flip="flip"></div>
                                 <div class="flipCorner bottomLeft d-md-none" data-flip="flip"></div>
@@ -103,11 +126,13 @@
                                 <h1 class="fw-bold mb-2 animate__animated animate__fadeInLeft welcomeTitleLight">
                                     Welcome to <span class="brandGradient">CashCanvas</span>
                                 </h1>
-                                <h6 class="mb-3 text-muted animate__animated animate__fadeInLeft animate__delay-1s domainLight">
+                                <h6
+                                    class="mb-3 text-muted animate__animated animate__fadeInLeft animate__delay-1s domainLight">
                                     Expense Management System
                                 </h6>
                                 <p class="mb-0 text-muted animate__animated animate__fadeInLeft animate__delay-1s fs-6">
-                                    Effortlessly manage your finances, track expenses, and achieve your financial goals with our intuitive and secure platform.
+                                    Effortlessly manage your finances, track expenses, and achieve your financial goals
+                                    with our intuitive and secure platform.
                                 </p>
                                 <div class="welcomeShapesLight">
                                     <div class="extra"></div>
